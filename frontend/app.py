@@ -1,7 +1,19 @@
 import requests
 import streamlit as st
+import os
 
-API_URL = "http://127.0.0.1:8000"
+def get_api_url():
+    try:
+        url = st.secrets.get("API_URL")
+        if url:
+            return url.rstrip("/")
+    except Exception:
+        pass
+
+    return os.getenv("API_URL", "http://127.0.0.1:8000").rstrip("/")
+
+
+API_URL = get_api_url()
 
 st.set_page_config(page_title="HR Policy Assistant", page_icon="📚", layout="centered")
 st.markdown(
