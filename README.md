@@ -117,6 +117,27 @@ Citation Generation
 Structured JSON Response
 ```
 
+### AI Models and Providers
+
+- Embeddings: Google Gemini hosted API
+  - Model: `gemini-embedding-001`
+  - Document task type: `RETRIEVAL_DOCUMENT`
+  - Query task type: `QUESTION_ANSWERING`
+
+- LLM: Groq hosted API
+  - Default model: `openai/gpt-oss-20b`
+  - Model can optionally be overridden using `GROQ_MODEL`.
+
+Both services use hosted API calls; no local LLM or embedding model is required.
+
+### Environment Variables
+
+| Variable | Purpose |
+|---|---|
+| GEMINI_API_KEY | Gemini embedding API key |
+| GROQ_API_KEY | Groq chat API key |
+| RAG_DEBUG | Enables debug logging when set to `1` |
+
 ## Project Structure
 
 ```text
