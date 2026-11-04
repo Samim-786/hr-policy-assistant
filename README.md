@@ -6,6 +6,38 @@ The application allows employees to ask questions about company policies in natu
 
 The system is designed to avoid unsupported policy answers by verifying supporting evidence and refusing questions when sufficient information is unavailable.
 
+## Live Demo
+
+| Component | URL |
+|---|---|
+| Streamlit Frontend | https://hr-policy-assistant-hkbcuu6muelqtowaip5hfx.streamlit.app/ |
+| FastAPI Backend | https://hr-policy-assistant-yhbp.onrender.com |
+| API Health Check | https://hr-policy-assistant-yhbp.onrender.com/health |
+| API Documentation | https://hr-policy-assistant-yhbp.onrender.com/docs |
+
+### Using the Deployed Application
+
+1. Open the Streamlit frontend.
+2. Navigate to **Admin - Upload Policies**.
+3. Upload the three Markdown policy files provided with the assignment:
+   - `leave-policy.md`
+   - `benefits-policy.md`
+   - `it-security-policy.md`
+4. Upload and index each document.
+5. Verify that the ChromaDB collection `hr_policy_chunks` contains indexed chunks.
+6. Navigate to **Employee - Ask Questions**.
+7. Ask questions about the uploaded policies and review the answers and citations.
+
+### Deployment and Storage Note
+
+The FastAPI backend is hosted on Render's free web service. Its filesystem is ephemeral, so uploaded documents and the local ChromaDB index can be lost when the service spins down, restarts, or redeploys.
+
+If the collection is empty, upload and index the policy documents again before asking questions.
+
+This is a prototype deployment limitation. A persistent disk or external vector database would be appropriate for long-term storage.
+
+See the [Render free instance limitations](https://render.com/docs/free) for details.
+
 ## Features
 
 - Upload Markdown and TXT policy documents.
@@ -130,7 +162,7 @@ The `data/` directory is generated locally and stores uploaded documents and the
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/Samim-786/hr-policy-assistant.git
 cd hr-policy-assistant
 ```
 
