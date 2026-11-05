@@ -4,7 +4,7 @@
 
 The HR Policy Assistant is a Retrieval-Augmented Generation (RAG) application that allows employees to ask questions about company policies using natural language.
 
-The application retrieves relevant information from uploaded policy documents and generates answers using an LLM. Every answer includes citations pointing to the original document and section.
+The application retrieves relevant information from uploaded policy documents and generates answers using an LLM.Every successfully answered question includes citations pointing to the original document and section. Refusals return an empty citations list.
 
 The primary design goals are:
 
@@ -132,6 +132,7 @@ The implementation follows these rules:
 - Oversized text blocks are split into smaller parts.
 
 Chunk overlap is not used because the supplied documents have relatively clear section boundaries.
+The trade-off is that facts spanning chunk boundaries may lose context. This approach was selected for the relatively structured sample policies. A small overlap could be evaluated for longer or less structured documents.
 
 Tables are preserved to avoid separating column headings from their corresponding values.
 
@@ -345,6 +346,8 @@ I selected ChromaDB because it provides persistent vector storage and similarity
 
 For the relatively small document collection in this assignment, a local persistent database is sufficient.
 
+Persistence is provided by ChromaDB's local PersistentClient. In the current Render deployment, the filesystem is ephemeral, so this does not guarantee durable storage across service restarts or replacements.
+
 ### 6.4 Section-Aware Chunking Instead of Fixed-Size Chunking
 
 Fixed-size chunking can separate headings, related paragraphs and table information.
@@ -413,6 +416,8 @@ Expand the evaluation dataset with more questions and expected citations.
 Evaluate retrieval quality, answer correctness and refusal behaviour.
 
 Explore hybrid search combining keyword-based retrieval with vector similarity search.
+
+Introduce claim-to-evidence validation to verify that generated answer statements, especially numerical values and conditions, are logically supported by their corresponding evidence.
 
 ### 8.3 Document Management
 

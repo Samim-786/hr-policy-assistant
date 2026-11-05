@@ -36,6 +36,8 @@ If the collection is empty, upload and index the policy documents again before a
 
 This is a prototype deployment limitation. A persistent disk or external vector database would be appropriate for long-term storage.
 
+Before testing the application, open the backend health-check endpoint and wait for the Render service to become healthy. The free instance may take some time to wake up after inactivity.
+
 See the [Render free instance limitations](https://render.com/docs/free) for details.
 
 ## Features
